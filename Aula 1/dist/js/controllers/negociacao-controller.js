@@ -1,3 +1,4 @@
+import { Negociacao } from "../models/negociacao.js";
 export class NegociacaoController {
     constructor() {
         this.inputData = document.querySelector('#data');
@@ -5,8 +6,21 @@ export class NegociacaoController {
         this.inputValor = document.querySelector('#valor');
     }
     adiciona() {
-        console.log(this.inputData);
-        console.log(this.inputQtd);
-        console.log(this.inputValor);
+        const negociacao = this.criaNegocicao();
+        console.log(negociacao);
+        this.limparFormulario();
+    }
+    criaNegocicao() {
+        const exp = /-/g; // criamos uma expressão regular que vai procurar todas as datas com o hifem
+        const date = new Date(this.inputData.value.replace(exp, ',')); // aqui falamos o date vai receber a data do inputdatavalue, só que com o replace recebendo a regex e subtituindo pela ',' 
+        const qtd = parseInt(this.inputQtd.value);
+        const valor = parseFloat(this.inputValor.value);
+        return new Negociacao(date, qtd, valor);
+    }
+    limparFormulario() {
+        this.inputData.value = '',
+            this.inputQtd.value = '',
+            this.inputValor.value = '',
+            this.inputData.focus();
     }
 }
