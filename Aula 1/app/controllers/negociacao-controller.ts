@@ -1,6 +1,8 @@
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 
+
+
 export class NegociacaoController{
     private inputData: HTMLInputElement;
     private inputQtd: HTMLInputElement;
