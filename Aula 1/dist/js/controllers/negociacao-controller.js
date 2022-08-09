@@ -15,7 +15,7 @@ export class NegociacaoController {
     }
     adiciona() {
         const negociacao = Negociacao.criaDe(this.inputData.value, this.inputQtd.value, this.inputValor.value);
-        if (!this.ehDiaUtil(negociacao.data)) { // a logica é: é diferente de dia não uti? então manda essa msg, se não segue a vida.
+        if (!this.ehDiaUtil(negociacao.data)) {
             this.mensagemView.update('Apenas negociações em dias úteis são aceitas');
             return;
         }
