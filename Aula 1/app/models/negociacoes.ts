@@ -6,13 +6,13 @@ export class Negociacoes{
     private negociacoes: Negociacao[] = [];
 
 
-    adiciona(negociacao: Negociacao){
+    public adiciona(negociacao: Negociacao){
         this.negociacoes.push(negociacao)
     }
 
     //lista(): ReadonlyArray<Negociacao>{
         // outra opção para digitar menos:
-    lista(): readonly Negociacao[]{
+    public lista(): readonly Negociacao[]{
         //return [...this.negociacoes]; retornando uma lista onde não altera a original.
         return this.negociacoes;
     }
