@@ -6,7 +6,7 @@ import { NegociacoesView } from "../views/negociacoes-view.js";
 export class NegociacaoController {
     constructor() {
         this.negociacoes = new Negociacoes();
-        this.negociacoesView = new NegociacoesView('#negociacoesView');
+        this.negociacoesView = new NegociacoesView('#negociacoesView', true);
         this.mensagemView = new mensagemView('#mensagemView');
         this.inputData = document.querySelector('#data');
         this.inputQtd = document.querySelector('#quantidade');
@@ -14,7 +14,7 @@ export class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
     }
     adiciona() {
-        const negociacao = this.criaNegocicao();
+        const negociacao = Negociacao.criaDe(this.inputData.value, this.inputQtd.value, this.inputValor.value);
         if (!this.ehDiaUtil(negociacao.data)) { // a logica é: é diferente de dia não uti? então manda essa msg, se não segue a vida.
             this.mensagemView.update('Apenas negociações em dias úteis são aceitas');
             return;
@@ -25,13 +25,6 @@ export class NegociacaoController {
     }
     ehDiaUtil(data) {
         return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO;
-    }
-    criaNegocicao() {
-        const exp = /-/g; // criamos uma expressão regular que vai procurar todas as datas com o hifem
-        const date = new Date(this.inputData.value.replace(exp, ',')); // aqui falamos o date vai receber a data do inputdatavalue, só que com o replace recebendo a regex e subtituindo pela ',' 
-        const qtd = parseInt(this.inputQtd.value);
-        const valor = parseFloat(this.inputValor.value);
-        return new Negociacao(date, qtd, valor);
     }
     limparFormulario() {
         this.inputData.value = '',

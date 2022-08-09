@@ -26,4 +26,13 @@ export class Negociacao {
         const data = new Date(this._data.getTime())
         return data;
     }
+
+    public static criaDe(dataString: string, quantidadeString: string, valorString:string): Negociacao{
+        const exp = /-/g; // criamos uma expressão regular que vai procurar todas as datas com o hifem
+        const date = new Date(dataString.replace(exp, ',')) // aqui falamos o date vai receber a data do inputdatavalue, só que com o replace recebendo a regex e subtituindo pela ',' 
+        const qtd = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+        
+        return new Negociacao(date, qtd, valor);
+    }
 }
